@@ -1,0 +1,11 @@
+class LogicalGate(self,n):
+  	def __init__(self,n):
+    self.label = n
+    
+    def get_label(self):
+		return self.label
+	
+	def get_output(self):
+		return self.get_output()
+		
+		
