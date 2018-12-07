@@ -1,11 +1,31 @@
-class LogicalGate(self,n):
-  	def __init__(self,n):
-    self.label = n
-    
-    def get_label(self):
-		return self.label
-	
-	def get_output(self):
-		return self.get_output()
-		
-		
+from PIL import Image
+
+im = Image.open(r"C:\Users\maplepoem\Desktop\lay_lighter.jpg")
+
+
+WIDTH = im.width
+HEIGHT = im.height
+
+ascii_char = list("$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. ")
+
+def get_char(r,g,b,alpha = 256):
+    if alpha == 0:
+        return ""
+    length = len(ascii_char)
+    gray = int(0.2126 * r + 0.7152 * g + 0.0722 * b)
+
+    unit = (256 + 1)/length
+    return ascii_char[int(gray/unit)]
+
+if __name__ == "__main__":
+
+    im = im.resize((int(WIDTH*1.4),HEIGHT),Image.NEAREST)#?
+    rgb_im = im.convert('RGB')
+    txt = ""
+    for i in range(HEIGHT):
+        for j in range(int(WIDTH*1.4)):
+            txt += get_char(*rgb_im.getpixel((j,i)))#?
+        txt += "\n"
+
+    with open("LAY_LIGHTER","w") as f:
+        f.write(txt)
